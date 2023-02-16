@@ -1,4 +1,4 @@
-package com.ydskingdom.security.auth;
+package com.ydskingdom.security.config.auth;
 
 //
 

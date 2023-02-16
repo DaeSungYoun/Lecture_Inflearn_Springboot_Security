@@ -1,4 +1,4 @@
-package com.ydskingdom.security.auth;
+package com.ydskingdom.security.config.auth;
 
 import com.ydskingdom.security.model.User;
 import com.ydskingdom.security.repository.UserRepository;
