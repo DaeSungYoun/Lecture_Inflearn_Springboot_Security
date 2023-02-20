@@ -45,26 +45,24 @@ public class IndexController {
     }
 
     @GetMapping({"", "/"})
-    public @ResponseBody
-    String index() {
+    public @ResponseBody String index() {
         return "index";
     }
 
     @GetMapping("/user")
     public @ResponseBody
-    String user() {
+    String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("principalDetails = " + principalDetails.getUser());
         return "user";
     }
 
     @GetMapping("/admin")
-    public @ResponseBody
-    String admin() {
+    public @ResponseBody String admin() {
         return "admin";
     }
 
     @GetMapping("/manager")
-    public @ResponseBody
-    String manager() {
+    public @ResponseBody String manager() {
         return "manager";
     }
 

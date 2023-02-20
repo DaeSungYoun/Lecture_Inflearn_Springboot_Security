@@ -19,6 +19,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    //loadUserByUsername이 호출되고 나서 @AuthenticationPrincipal 어노테이션이 생성된다.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
