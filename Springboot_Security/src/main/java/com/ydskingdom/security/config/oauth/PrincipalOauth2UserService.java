@@ -27,10 +27,22 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         System.out.println("super.loadUser(userRequest).getAttributes() = " + super.loadUser(userRequest).getAttributes());
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        String provider = userRequest.getClientRegistration().getClientId();
-        String providerId = oAuth2User.getAttribute("sub");
+
+        OAuth2UserInfo oAuth2UserInfo = null;
+        if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+            System.out.println("구글");
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+            System.out.println("페이스북");
+            oAuth2UserInfo = new FaceBookUserInfo(oAuth2User.getAttributes());
+        } else {
+            System.out.println("우린 구글과 페이스북만 지원해요");
+        }
+
+        String provider = oAuth2UserInfo.getProvider();
+        String providerId = oAuth2UserInfo.getProviderId();
         String username = provider + "_" + providerId;
-        String email = oAuth2User.getAttribute("email");
+        String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
         User userEntity = userRepository.findByUsername(username);
