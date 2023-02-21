@@ -1,6 +1,5 @@
 package com.ydskingdom.jwt.config;
 
-import com.ydskingdom.jwt.filter.MyFilter1;
 import com.ydskingdom.jwt.filter.MyFilter3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
