@@ -1,4 +1,4 @@
-package com.ydskingdom.jwt.auth;
+package com.ydskingdom.jwt.config.auth;
 
 import com.ydskingdom.jwt.model.User;
 import org.springframework.security.core.GrantedAuthority;

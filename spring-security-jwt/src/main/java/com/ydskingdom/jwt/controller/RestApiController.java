@@ -27,4 +27,9 @@ public class RestApiController {
     public String join(@RequestBody User user) {
         return userService.join(user);
     }
+
+    @GetMapping("/api/v1/user")
+    public String user() {
+        return "<h1>user</h1>";
+    }
 }

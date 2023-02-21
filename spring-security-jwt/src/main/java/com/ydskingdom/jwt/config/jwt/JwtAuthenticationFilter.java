@@ -3,11 +3,9 @@ package com.ydskingdom.jwt.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ydskingdom.jwt.auth.PrincipalDetails;
+import com.ydskingdom.jwt.config.auth.PrincipalDetails;
 import com.ydskingdom.jwt.dto.LoginRequestDto;
-import com.ydskingdom.jwt.model.User;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -71,12 +69,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		PrincipalDetails principalDetailis = (PrincipalDetails) authResult.getPrincipal();
 
 		String jwtToken = JWT.create()
-				.withSubject("cos토큰")
-				.withExpiresAt(new Date(System.currentTimeMillis()+(60000*10)))
+				.withSubject(principalDetailis.getUsername())
+				.withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.EXPIRATION_TIME))
 				.withClaim("id", principalDetailis.getUser().getId())
 				.withClaim("username", principalDetailis.getUser().getUsername())
-				.sign(Algorithm.HMAC512("cos"));
+				.sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
-		response.addHeader("Authorization", "Bearer " + jwtToken);
+		response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
 	}
 }
